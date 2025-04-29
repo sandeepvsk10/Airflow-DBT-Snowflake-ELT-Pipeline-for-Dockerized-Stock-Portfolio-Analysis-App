@@ -21,13 +21,13 @@ Coming soon...
 
 This project utilizes several modern technologies to build a scalable and efficient ELT pipeline for financial analysis:
 
-- Airflow: Orchestrates the workflow and automates the pipeline execution.
-- dbt (Data Build Tool): Models and transforms raw financial data stored in Snowflake.
-- Snowflake: A cloud data warehouse for storing and querying large datasets.
-- Yahoo Finance API: Source of stock market and financial data.
-- PySpark: Used for large-scale transformations within Snowflake.
-- Streamlit: Displays the analysis results in a user-friendly web app.
-- Docker: Each component is containerized to ensure isolation, portability, and easy scaling.
+- **Airflow**: Orchestrates the workflow and automates the pipeline execution.
+- **dbt** (Data Build Tool): Models and transforms raw financial data stored in Snowflake.
+- **Snowflake**: A cloud data warehouse for storing and querying large datasets.
+- **Yahoo Finance API**: Source of stock market and financial data.
+- **PySpark**: Used for large-scale transformations within Snowflake.
+- **Streamlit**: Displays the analysis results in a user-friendly web app.
+- **Docker**: Each component is containerized to ensure isolation, portability, and easy scaling.
 
   
 
