@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: market_data
+    schema: ETL_PROJECT  # Your Snowflake schema with raw tables
+    tables:
+      - name: AMAZON
+        description: "Raw Amazon stock data"
+      - name: IGLB
+        description: "Raw iShares 10+ Year Investment Grade Bond ETF data"
+      - name: SPY
+        description: "Raw SPDR S&P 500 ETF data"
