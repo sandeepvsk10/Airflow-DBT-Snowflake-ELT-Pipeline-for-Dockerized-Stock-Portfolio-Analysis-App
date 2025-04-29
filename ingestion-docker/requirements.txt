@@ -1,0 +1,8 @@
+snowflake-connector-python
+snowflake
+pandas
+numpy
+requests
+datetime
+yfinance
+python-dotenv
