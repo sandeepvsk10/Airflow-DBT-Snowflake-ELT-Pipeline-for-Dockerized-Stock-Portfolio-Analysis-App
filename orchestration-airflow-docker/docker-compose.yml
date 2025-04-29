@@ -1,0 +1,89 @@
+version: '3'
+
+services:
+  # Airflow Web Server
+  airflow-webserver:
+    image: apache/airflow:2.5.0
+    container_name: airflow-webserver
+    environment:
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__WEBSERVER__RBAC=true
+      - AIRFLOW__CORE__FERNET_KEY=your_fernet_key
+    ports:
+      - "8080:8080"  # Expose Airflow Web UI
+    depends_on:
+      - airflow-scheduler
+      - postgres
+    networks:
+      - airflow-net
+
+  # Airflow Scheduler
+  airflow-scheduler:
+    image: apache/airflow:2.5.0
+    container_name: airflow-scheduler
+    environment:
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+    depends_on:
+      - postgres
+    networks:
+      - airflow-net
+
+  # PostgreSQL Database for Airflow
+  postgres:
+    image: postgres:13
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - airflow-net
+
+  # ELT Application Containers
+  app1:
+    build: ./app1
+    container_name: app1
+    ports:
+      - "5001:5001"  # Expose app1 port
+    networks:
+      - airflow-net
+
+  app2:
+    build: ./app2
+    container_name: app2
+    ports:
+      - "5002:5002"  # Expose app2 port
+    networks:
+      - airflow-net
+
+  app3:
+    build: ./app3
+    container_name: app3
+    ports:
+      - "5002:5002"  # Expose app2 port
+    networks:
+      - airflow-net
+
+  # Airflow Flower (monitoring tool for Airflow)
+  airflow-flower:
+    image: apache/airflow:2.5.0
+    container_name: airflow-flower
+    environment:
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+    ports:
+      - "5555:5555"  # Expose Flower UI for monitoring
+    depends_on:
+      - airflow-scheduler
+    networks:
+      - airflow-net
+
+volumes:
+  postgres_data:
+
+networks:
+  airflow-net:
+    driver: bridge
