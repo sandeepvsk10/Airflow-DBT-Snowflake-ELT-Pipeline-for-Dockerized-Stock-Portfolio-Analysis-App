@@ -1,5 +1,10 @@
 # Airflow DBT Snowflake ELT Pipeline for Dockerized Stock Portfolio Analysis App
 
+(Following Works in progress)
+- Deployment in Cloud
+- Credential Vaults
+
+
 This project implements an ELT pipeline for stock portfolio analysis, leveraging Docker for containerization and Apache Airflow for workflow orchestration. The pipeline is designed to automate the data extraction, transformation, and loading (ETL) processes, followed by data analysis, all within a Dockerized environment. The system interacts with Yahoo Finance API to fetch financial data, processes it using Snowflake and dbt, performs analysis using Python, and visualizes the results with Streamlit.
 
 
